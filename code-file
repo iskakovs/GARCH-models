@@ -1,0 +1,45 @@
+# Install packages
+install.packages("rugarch")
+install.packages("forecast")
+install.packages("lubridate")
+install.packages("xts")
+install.packages("urca")
+install.packages("tseries")
+install.packages("ggplot2")
+install.packages("fUnitRoots")
+install.packages("lmtest")
+install.packages("rio")
+install.packages("car")
+install.packages("timeSeries")
+install.packages("tidyverse")
+install.packages("reshape")
+install.packages("nutshell")
+install.packages("gridExtra")
+install.packages("Hmisc")
+
+#Load libraries
+library(rugarch)
+library(forecast)
+library(lubridate)
+library(xts)
+library(urca)
+library(tseries)
+library(ggplot2)
+library(fUnitRoots)
+library(lmtest)
+library(rio)
+library(car)
+library(timeSeries)
+library(tidyverse)
+library(fpp3)
+library(patchwork)
+library(reshape)
+library(gridExtra)
+library(Hmisc)
+
+#Load the data
+magnit = read.csv("C:\\Users\\Admin\\Desktop\\MGNT_180101_220223.csv", header = TRUE)
+
+#
+#Select variables we manipulate
+data <- data.frame(magnit$X.DATE., magnit$X.CLOSE.)

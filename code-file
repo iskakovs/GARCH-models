@@ -80,3 +80,23 @@ pacf(r, plot = FALSE)
 #Visualize ACF and PACF
 acf(r) #MA(2)
 pacf(r) #AR(1) or may be AR(2)
+
+#Check if the residuals are in the form of random noise
+series <- arima.sim(list(order = c(0,0,0)), n = 1000)
+grid.arrange(ggAcf(series), ggPacf(series), nrow = 2)
+
+# Model 1: ARIMA (1, 0, 2)
+model1 <- arima(r, order = c(1, 0, 2))
+summary(model1)
+
+# Model 2: ARIMA (2, 0, 2)
+model2 <- arima(r, order = c(2, 0, 2))
+summary(model2)
+
+# Model 3: ARIMA (2, 0, 3)
+model3 <- arima(r, order = c(2, 0, 3))
+summary(model3)
+
+# Model 4: ARIMA (2, 0, 3)
+model4 <- arima(r, order = c(0, 0, 0))
+summary(model4)

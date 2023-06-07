@@ -72,3 +72,11 @@ plot(r, type = "l", xlab = "")
 summary(ur.df(r, type = "drift", selectlags = "AIC"))
 #Value of t-statistics = -18.2858 < -3.43 = Critical value 
 # => H0 hypothesis of non-stationarity od the prices is rejected
+
+#ACF and PACF estimated values
+acf(r, plot = FALSE)
+pacf(r, plot = FALSE)
+
+#Visualize ACF and PACF
+acf(r) #MA(2)
+pacf(r) #AR(1) or may be AR(2)

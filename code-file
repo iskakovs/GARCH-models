@@ -55,3 +55,20 @@ data = as_tsibble(data, index = trading_day)
 
 # Plot the graph and since we have time series ACF and PACF
 gg_tsdisplay(data, p, plot_type = 'partial')
+
+#Check for stationarity (ADF-test)
+summary(ur.df(data$p, type = "drift", selectlags = "AIC"))
+#Value of t-statistics = -2.302 > -3.43 = Critical value 
+# => H0 hypothesis of non-stationarity is failed to be rejected
+
+#Take log of the prices
+r = diff(log(data$p))
+
+#Plot the graph
+plot(r, type = "l", xlab = "")
+# Looks pretty stationary
+
+#Check for stationarity again for transformed series(ADF-test)
+summary(ur.df(r, type = "drift", selectlags = "AIC"))
+#Value of t-statistics = -18.2858 < -3.43 = Critical value 
+# => H0 hypothesis of non-stationarity od the prices is rejected

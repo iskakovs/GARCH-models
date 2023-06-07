@@ -40,6 +40,18 @@ library(Hmisc)
 #Load the data
 magnit = read.csv("C:\\Users\\Admin\\Desktop\\MGNT_180101_220223.csv", header = TRUE)
 
-#
 #Select variables we manipulate
 data <- data.frame(magnit$X.DATE., magnit$X.CLOSE.)
+
+#Select variables we manipulate
+data <- data.frame(magnit$X.DATE., magnit$X.CLOSE.)
+
+# Rename columns
+colnames(data) <- c('date', 'p') 
+
+# Insert trading days column
+data = mutate(data, trading_day = row_number())
+data = as_tsibble(data, index = trading_day)
+
+# Plot the graph and since we have time series ACF and PACF
+gg_tsdisplay(data, p, plot_type = 'partial')

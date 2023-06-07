@@ -124,3 +124,23 @@ summary(g_model)
 
 # All our coefficients are significant, and p value is 2.726e-16. 
 # So we can detect the GARCH-effect
+
+# Check for GARCH(1,1) model
+require(rugarch)
+GARCHspec11 <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1,1)))
+M_garch11 = ugarchfit(GARCHspec11, data = r)
+M_garch11
+# All our coefficients are significant at 5% level, but not at 1%.
+# Let's check other models - GARCH(1,2) and GARCH(2,1)
+
+# Check for GARCH(1,2) model
+GARCHspec12 <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1,2)))
+M_garch12 = ugarchfit(GARCHspec12, data = r)
+M_garch12
+
+# Check for GARCH(2,1) model
+GARCHspec21 <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(2,1)))
+M_garch21 = ugarchfit(GARCHspec21, data = r)
+M_garch21
+
+# So the optimal model is GARCH(1,1)

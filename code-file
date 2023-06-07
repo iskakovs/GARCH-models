@@ -100,3 +100,27 @@ summary(model3)
 # Model 4: ARIMA (2, 0, 3)
 model4 <- arima(r, order = c(0, 0, 0))
 summary(model4)
+
+# CONCLUSION: The smallest AIC is for the  ARIMA (2, 0, 2), so we conclude that we have ARMA(2,2) model
+
+#Check for residuals
+Box.test(model2$residuals, type = "Ljung-Box")
+# So, from Ljung-Box test we accepted the null hypothesis that the residuals are white noise
+
+#Save the residuals of the model
+e = model2$residuals
+
+#Plot the residuals
+ggtsdisplay(e)
+
+#Check for GARCH-effect
+#Generate lagged variables
+e_1 <- Lag(e, -1)
+e_2 <- Lag(e, -2)
+
+#Create the model from square of the residuals and check for significance 
+g_model <- lm(e^2 ~ e_1^2 + e_2^2)
+summary(g_model)
+
+# All our coefficients are significant, and p value is 2.726e-16. 
+# So we can detect the GARCH-effect

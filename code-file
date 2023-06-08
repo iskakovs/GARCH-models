@@ -144,3 +144,16 @@ M_garch21 = ugarchfit(GARCHspec21, data = r)
 M_garch21
 
 # So the optimal model is GARCH(1,1)
+
+# Since both additions of sigma_2 and gamma_2 turned out to be insignificant, 
+# the GARCH(1,1) model will also be preferable to the GARCH(2,2) model
+
+#Let's check for volatilities of the GARCH(1,1) model
+# Estimate the volatility
+vol = M_garch11@fit$sigma
+
+#Annualize the volatilities
+vol_ann = vol*(250)^(1/2)*100
+
+#Plot the graph of the volatilities
+plot(vol_ann, type = "l", xlab = "")

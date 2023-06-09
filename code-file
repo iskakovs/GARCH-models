@@ -181,3 +181,25 @@ t_garch11
 # According to parameters estimation this model is better than the simple GARCH(1,1) model
 # So, for now tGARCH(1,1) model shows better coefficients estimates (see Pr(>|t|) - all coefficients are significant)
 # All our coefficients are significant at 1% level and the Akaike information criterion is better (lower)
+
+#Create the EGARCH(1,1) model and check for lambda asymmetry coefficient 
+eGARCHspec11 <- ugarchspec(variance.model = list(model = "eGARCH", 
+                          garchOrder = c(1,1)),
+                          distribution.model = "norm")
+e_garch11 = ugarchfit(eGARCHspec11, data = r)
+e_garch11
+
+# asymmetry coefficient is represented by aplha1 which is < 0, but insignificant
+# the negativeness says that positive shock has less effect, than the negative shocks.
+
+#Finally, let's compare the models
+M_garch11
+t_garch11
+e_garch11
+
+#We will use AIC
+# For GARCH(1,1)  : -5.2395
+# For GRACH-t     : -5.3745
+# For EGRACH(1,1) : -5.2481
+
+# The smallest value for AIC is in GRACH-t, so we conclude that this model is the best one

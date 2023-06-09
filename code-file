@@ -157,3 +157,17 @@ vol_ann = vol*(250)^(1/2)*100
 
 #Plot the graph of the volatilities
 plot(vol_ann, type = "l", xlab = "")
+
+#Plot the graph of the volatilities
+plot(vol_ann, type = "l", xlab = "")
+
+
+# Forecast the volatilities for T+1 and T+2 periods
+# Forecast for 2 periods
+volforec = ugarchforecast(M_garch11, r, n.ahead = 2) 
+volforec
+
+# Convert the volatility to annual volatility
+vol_ann_forec = volforec@forecast$sigmaFor*(250)^(1/2)*100
+vol_ann_forec
+#So we have a high volatility 222.47% and 219.85%

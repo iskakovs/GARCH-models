@@ -203,3 +203,23 @@ e_garch11
 # For EGRACH(1,1) : -5.2481
 
 # The smallest value for AIC is in GRACH-t, so we conclude that this model is the best one
+
+# Now let's calculate the volatility for this model:
+vol_t = t_garch11@fit$sigma
+
+#Annualize the volatilities
+vol_t_ann = vol_t*(250)^(1/2)*100
+
+#Plot the graph of the volatilities
+plot(vol_t_ann, type = "l", xlab = "")
+
+# And forecast the volatilities for GARCH-t model
+# Forecast the volatilities for T+1 and T+2 periods
+# Forecast for 2 periods
+volforec_t = ugarchforecast(e_garch11, r, n.ahead = 2) 
+volforec_t
+
+# Convert the volatility to annual volatility
+volt_ann_forec = volforec_t@forecast$sigmaFor*(250)^(1/2)*100
+volt_ann_forec
+#Still we have a high volatility for period T+1: 221.09% and period T+2: 200.81%

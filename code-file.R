@@ -37,7 +37,7 @@ library(reshape)
 library(gridExtra)
 library(Hmisc)
 
-#Load the data
+#Load the data 
 magnit = read.csv("C:\\Users\\Admin\\Desktop\\MGNT_180101_220223.csv", header = TRUE)
 
 #Select variables we manipulate
